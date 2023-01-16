@@ -24,7 +24,14 @@ class MealRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'lang' => 'required',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'lang.required'=>'Izbor jezika je obavezan / lang=hr or lang=en'
         ];
     }
 }
