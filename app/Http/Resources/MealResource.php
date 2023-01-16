@@ -27,40 +27,4 @@ class MealResource extends JsonResource
         'ingredients'=>IngredientResource::collection($this->whenLoaded('ingredients')),
         ];
     }
-
-    public function toResponse($request)
-    {
-        $data = $this->resolve($request);
-        if ($data instanceof Collection) {
-            $data = $data->all();
-        }
-
-        $paginated = $this->resource->toArray();
-        // perform a dd($paginated) to see how $paginated looks like
-
-        $json = array_merge_recursive(
-            [
-                self::$wrap => $data
-            ],
-            [
-                'links' => [
-                    'first' => $paginated['first_page_url'] ?? null,
-                    'last' => $paginated['last_page_url'] ?? null,
-                    'prev' => $paginated['prev_page_url'] ?? null,
-                    'next' => $paginated['next_page_url'] ?? null,
-                ],
-                'meta' => [
-                    'current_page' => $metaData['current_page'] ?? null,
-                    'total_items' => $metaData['total'] ?? null,
-                    'per_page' => $metaData['per_page'] ?? null,
-                    'total_pages' => $metaData['total'] ?? null,
-                ],
-            ],
-            $this->with($request),
-            $this->additional
-        );
-
-
-        return response()->json($json);
-    }
 }
