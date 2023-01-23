@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use Error;
 use DateTime;
 use App\Models\Meal;
 use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Response;
 use App\Http\Requests\MealRequest;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
@@ -12,8 +14,10 @@ use App\Http\Resources\MealResource;
 
 class MealController extends Controller
 {
-    public function meals(Request $request)
+
+    public function meals(MealRequest $request)
     {
+
         if ($request->lang) {
             App::setLocale($request->lang);
         }
@@ -25,7 +29,7 @@ class MealController extends Controller
         }
 
         if ($request->with) {
-            $meal_query = Meal::with($request->with);
+            $meal_query = Meal::with($request->with)->where('meal_status', '!=', 'deleted');
         } else {
             $meal_query = Meal::where('meal_status', '!=', 'deleted');
         }

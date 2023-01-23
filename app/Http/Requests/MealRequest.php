@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class MealRequest extends FormRequest
 {
@@ -15,7 +17,6 @@ class MealRequest extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,10 +29,18 @@ class MealRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
+    public function messages()
     {
         return [
-            'lang.required'=>'Izbor jezika je obavezan / lang=hr or lang=en'
+            'lang.required'=>'Izbor jezika je obavezan / lang=hr or lang=en',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $response = [
+            'message' => $validator->errors()->first(),
+        ];
+        throw new HttpResponseException(response()->json($response, 200));
     }
 }
