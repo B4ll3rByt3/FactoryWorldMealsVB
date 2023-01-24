@@ -30,7 +30,6 @@ class Meal extends Model
 
     public function ingredients():BelongsToMany
     {
-        return $this -> belongsToMany(Ingredient::class, 'meal_ingredients')
-                     ->withTrashed();
+        return $this -> belongsToMany(Ingredient::class, 'meal_ingredients');
     }
 }

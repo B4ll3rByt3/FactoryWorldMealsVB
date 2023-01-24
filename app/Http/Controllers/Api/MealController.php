@@ -29,7 +29,8 @@ class MealController extends Controller
         }
 
         if ($request->with) {
-            $meal_query = Meal::with($request->with)->where('meal_status', '!=', 'deleted');
+            $with=explode(',', $request->with);
+            $meal_query = Meal::with($with)->where('meal_status', '!=', 'deleted');
         } else {
             $meal_query = Meal::where('meal_status', '!=', 'deleted');
         }

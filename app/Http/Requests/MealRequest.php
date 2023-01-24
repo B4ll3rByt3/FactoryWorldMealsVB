@@ -17,6 +17,9 @@ class MealRequest extends FormRequest
     {
         return true;
     }
+
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,6 +29,7 @@ class MealRequest extends FormRequest
     {
         return [
             'lang' => 'required',
+            'with' => 'sometimes|required:tags,category,ingredients',
         ];
     }
 
@@ -33,6 +37,7 @@ class MealRequest extends FormRequest
     {
         return [
             'lang.required'=>'Izbor jezika je obavezan / lang=hr or lang=en',
+            'with.required' =>'Krivo upisan filter :  tags, category, ingredients'
         ];
     }
 
