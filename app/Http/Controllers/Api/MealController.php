@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use Error;
-use DateTime;
 use App\Models\Meal;
-use Illuminate\Http\Request;
-use GuzzleHttp\Psr7\Response;
 use App\Http\Requests\MealRequest;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
@@ -41,8 +37,9 @@ class MealController extends Controller
                     'Krivo upisan query u parametar with. Mora bit upisano nesto od: tags,category,ingredients',
                 ];
                 return response()->json($response, 200);
+            } else {
+                $meal_query = Meal::with($with)->where('meal_status', '!=', 'deleted');
             }
-            $meal_query = Meal::with($with)->where('meal_status', '!=', 'deleted');
         } else {
             $meal_query = Meal::where('meal_status', '!=', 'deleted');
         }
