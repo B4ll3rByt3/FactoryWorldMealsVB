@@ -17,7 +17,6 @@ class MealController extends Controller
 
     public function meals(MealRequest $request)
     {
-
         if ($request->lang) {
             App::setLocale($request->lang);
         }
@@ -28,22 +27,29 @@ class MealController extends Controller
             $perPage=10;
         }
 
+        $allRelations = array (
+            'category',
+            'tags',
+            'ingredients'
+        );
+
         if ($request->with) {
             $with=explode(',', $request->with);
+            if (array_diff($with, $allRelations)) {
+                $response = [
+                    'message' =>
+                    'Krivo upisan query u parametar with. Mora bit upisano nesto od: tags,category,ingredients',
+                ];
+                return response()->json($response, 200);
+            }
             $meal_query = Meal::with($with)->where('meal_status', '!=', 'deleted');
         } else {
             $meal_query = Meal::where('meal_status', '!=', 'deleted');
         }
 
-        if (DateTime::createFromFormat('U', $request->diff_time) == true) {
-            if ($request->diff_time>0) {
-                $meal_query->orWhere('created_at', '>=', date($request->diff_time))->restore();
-            }
-        } elseif ($request->diff_time) {
-            return response()->json(['Parametar dif_time mora bit u formatu UNIX timestamp']);
+        if ($request->diff_time>0) {
+            $meal_query->orWhere('created_at', '>=', date($request->diff_time))->restore();
         }
-
-        //koristim samo za testiranje
 
         if ($request->category) {
             if ($request->category==='null' or $request->category==='NULL') {

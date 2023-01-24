@@ -29,15 +29,21 @@ class MealRequest extends FormRequest
     {
         return [
             'lang' => 'required',
-            'with' => 'sometimes|required:tags,category,ingredients',
+            'tags' => 'sometimes|min:1',
+            'diff_time' => 'sometimes|date_format:U',
+            'per_page' => 'sometimes|between:1,1',
+            'page' => 'sometimes|between:1,1',
         ];
     }
 
     public function messages()
     {
         return [
-            'lang.required'=>'Izbor jezika je obavezan / lang=hr or lang=en',
-            'with.required' =>'Krivo upisan filter :  tags, category, ingredients'
+            'lang.required' => 'Izbor jezika je obavezan / lang=hr or lang=en',
+            'tags.min' => 'Mora biti upisan minimalno jedan ID',
+            'diff_time.date_format' => 'Parametar dif_time mora bit u formatu UNIX timestamp',
+            'per_page.between' => 'Mora bit izabran samo jedan broj',
+            'page.between' => 'Mora bit izabran samo jedan broj',
         ];
     }
 
