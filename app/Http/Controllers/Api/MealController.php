@@ -52,8 +52,13 @@ class MealController extends Controller
                 $meal_query->whereNull('category_id');
             } elseif ($request->category === '!null' or $request->category === '!NULL') {
                 $meal_query->where('category_id', '!=', 'null')->orderBy('id', 'ASC');
-            } else {
+            } elseif (is_numeric($request->category)) {
                 $meal_query->where('category_id', $request->category);
+            } else {
+                $response = [
+                    'message' => 'Krivo upisan query. Mora biti pozitivan broj ili null ili !null',
+                ];
+                return response()->json($response, 200);
             }
         }
 

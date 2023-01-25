@@ -28,11 +28,11 @@ class MealRequest extends FormRequest
     public function rules()
     {
         return [
-            'lang' => 'required',
-            'tags' => 'sometimes|min:1',
+            'lang' => 'required|in:hr,en',
+            'tags' => 'sometimes|min:1|distinct|integer',
             'diff_time' => 'sometimes|date_format:U',
-            'per_page' => 'sometimes|between:1,1',
-            'page' => 'sometimes|between:1,1',
+            'per_page' => 'sometimes|between:1,1|integer',
+            'page' => 'sometimes|between:1,1|integer',
             'category' => 'sometimes|min:1'
         ];
     }
@@ -41,6 +41,7 @@ class MealRequest extends FormRequest
     {
         return [
             'lang.required' => 'Izbor jezika je obavezan / lang=hr or lang=en',
+            'lang.in' => 'jezik mora biti jedan od sljedecih: hr, en',
             'tags.min' => 'Mora biti upisan minimalno jedan ID',
             'diff_time.date_format' => 'Parametar dif_time mora bit u formatu UNIX timestamp',
             'per_page.between' => 'Mora bit izabran samo jedan broj',
