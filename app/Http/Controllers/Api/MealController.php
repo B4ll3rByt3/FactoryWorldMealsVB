@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Meal;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\MealRequest;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
@@ -51,7 +52,7 @@ class MealController extends Controller
             if ($request->category==='null' or $request->category==='NULL') {
                 $meal_query->whereNull('category_id');
             } elseif ($request->category==='!null' or $request->category==='!NULL') {
-                $meal_query->where('category_id', '!=', 'null');
+                $meal_query->where('category_id', '!=', 'null')->orderBy('id', 'ASC');
             } else {
                 $meal_query->where('category_id', $request->category);
             }

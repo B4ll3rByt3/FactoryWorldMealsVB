@@ -33,6 +33,7 @@ class MealRequest extends FormRequest
             'diff_time' => 'sometimes|date_format:U',
             'per_page' => 'sometimes|between:1,1',
             'page' => 'sometimes|between:1,1',
+            'category' => 'sometimes|min:1'
         ];
     }
 
@@ -44,6 +45,7 @@ class MealRequest extends FormRequest
             'diff_time.date_format' => 'Parametar dif_time mora bit u formatu UNIX timestamp',
             'per_page.between' => 'Mora bit izabran samo jedan broj',
             'page.between' => 'Mora bit izabran samo jedan broj',
+            'category.min' => 'mora biti upisan samo jedan uvijet ID, null, !null',
         ];
     }
 
