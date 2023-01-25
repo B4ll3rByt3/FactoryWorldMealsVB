@@ -16,19 +16,19 @@ class TagFactory extends Factory
      */
     public function definition()
     {
-        static $title_id_hr= 1;
-        static $title_id_en= 1;
-        static $slug_id= 1;
-        $tag_title_hr =['Naziv kategorije '. $title_id_hr++.' na HR jeziku'];
-        $tag_title_en =['Naziv kategorije '. $title_id_en++.' na EN jeziku'];
-        $tag_slug =['tag-'. $slug_id++];
+        static $title_id_hr = 1;
+        static $title_id_en = 1;
+        static $slug_id = 1;
+        $tag_title_hr = ['Naziv kategorije ' . $title_id_hr++ . ' na HR jeziku'];
+        $tag_title_en = ['Naziv kategorije ' . $title_id_en++ . ' na EN jeziku'];
+        $tag_slug = ['tag-' . $slug_id++];
 
         return
         [
             'tag_slug' => fake()->randomElement($tag_slug) ,
-            'hr'=>[
+            'hr' => [
                 'tag_title' => fake()->randomElement($tag_title_hr),],
-            'en'=>[
+            'en' => [
                 'tag_title' => fake()->randomElement($tag_title_en),],
         ];
     }

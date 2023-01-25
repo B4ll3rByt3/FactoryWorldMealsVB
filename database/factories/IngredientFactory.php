@@ -16,19 +16,19 @@ class IngredientFactory extends Factory
      */
     public function definition()
     {
-        static $title_id_hr= 1;
-        static $title_id_en= 1;
-        static $slug_id= 1;
-        $ingredient_title_hr =['Naziv sastojka '. $title_id_hr++ . ' na HR jeziku'];
-        $ingredient_title_en =['Naziv sastojka '. $title_id_en++ . ' na EN jeziku'];
-        $ingredient_slug =['sastojak-'. $slug_id++];
+        static $title_id_hr = 1;
+        static $title_id_en = 1;
+        static $slug_id = 1;
+        $ingredient_title_hr = ['Naziv sastojka ' . $title_id_hr++ . ' na HR jeziku'];
+        $ingredient_title_en = ['Naziv sastojka ' . $title_id_en++ . ' na EN jeziku'];
+        $ingredient_slug = ['sastojak-' . $slug_id++];
 
         return
         [
             'ingredient_slug' => fake()->randomElement($ingredient_slug) ,
-            'hr'=>[
+            'hr' => [
                 'ingredient_title' => fake()->randomElement($ingredient_title_hr),],
-            'en'=>[
+            'en' => [
                 'ingredient_title' => fake()->randomElement($ingredient_title_en),],
             ];
     }

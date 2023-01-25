@@ -1,4 +1,4 @@
 {
     "editor.formatOnSave": true,
-    "phpcs.standard": "PSR2"
+    "phpcs.standard": "PSR12"
 }

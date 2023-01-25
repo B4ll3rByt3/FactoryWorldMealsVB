@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    use HasFactory, Translatable;
+    use HasFactory;
+    use Translatable;
+
     public $timestamps = false;
     protected $table = 'categories';
     public $translatedAttributes = ['category_title'];
     protected $fillable = ['category_slug'];
 
-    public function meal():BelongsTo
+    public function meal(): BelongsTo
     {
         return $this -> belongsTo(Meal::class, 'category_id', 'id');
     }

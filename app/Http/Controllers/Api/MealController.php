@@ -43,7 +43,7 @@ class MealController extends Controller
             $meal_query = Meal::where('meal_status', '!=', 'deleted');
         }
 
-        if ($request->diff_time>0) {
+        if ($request->diff_time > 0) {
             $meal_query->orWhere('created_at', '>=', date($request->diff_time))->restore();
         }
 
@@ -58,7 +58,7 @@ class MealController extends Controller
         }
 
         if ($request->tags) {
-            $tag=explode(',', $request->tags);
+            $tag = explode(',', $request->tags);
             foreach ($tag as $tags) {
                 $meal_query->whereRelation('tags', 'tag_id', $tags);
             }

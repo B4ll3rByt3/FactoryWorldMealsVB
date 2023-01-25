@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Ingredient extends Model
 {
-    use HasFactory,Translatable;
+    use HasFactory;
+    use Translatable;
+
     public $timestamps = false;
     protected $table = 'ingredients';
     public $translatedAttributes = ['ingredient_title'];
     protected $fillable = ['ingredient_slug'];
 
-    public function meal():BelongsToMany
+    public function meal(): BelongsToMany
     {
         return $this -> belongsToMany(Meal::class, 'meal_ingredients');
     }

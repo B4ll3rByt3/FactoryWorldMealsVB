@@ -18,7 +18,7 @@ class MealTagSeeder extends Seeder
     public function run()
     {
         $meals = Meal::all();
-        $tags=Tag::all();
+        $tags = Tag::all();
 
         foreach ($meals as $meal) {
             foreach ($tags->random(2) as $tag) {

@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
-    use HasFactory, Translatable;
+    use HasFactory;
+    use Translatable;
+
     public $timestamps = false;
     public $translatedAttributes = ['tag_title'];
     protected $fillable = ['slug'];
 
-    public function meal():BelongsToMany
+    public function meal(): BelongsToMany
     {
         return $this -> belongsToMany(Meal::class, 'meal_tags');
     }
