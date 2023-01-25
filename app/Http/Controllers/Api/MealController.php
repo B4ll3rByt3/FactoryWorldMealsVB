@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Meal;
-use Illuminate\Http\JsonResponse;
 use App\Http\Requests\MealRequest;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
@@ -18,9 +17,9 @@ class MealController extends Controller
         }
 
         if ($request->per_page) {
-            $perPage=$request->per_page;
+            $perPage = $request->per_page;
         } else {
-            $perPage=10;
+            $perPage = 10;
         }
 
         $allRelations = array (
@@ -30,7 +29,7 @@ class MealController extends Controller
         );
 
         if ($request->with) {
-            $with=explode(',', $request->with);
+            $with = explode(',', $request->with);
             if (array_diff($with, $allRelations)) {
                 $response = [
                     'message' =>
@@ -49,9 +48,9 @@ class MealController extends Controller
         }
 
         if ($request->category) {
-            if ($request->category==='null' or $request->category==='NULL') {
+            if ($request->category === 'null' or $request->category === 'NULL') {
                 $meal_query->whereNull('category_id');
-            } elseif ($request->category==='!null' or $request->category==='!NULL') {
+            } elseif ($request->category === '!null' or $request->category === '!NULL') {
                 $meal_query->where('category_id', '!=', 'null')->orderBy('id', 'ASC');
             } else {
                 $meal_query->where('category_id', $request->category);
@@ -65,7 +64,7 @@ class MealController extends Controller
             }
         }
 
-        $meal=$meal_query->paginate($perPage);
+        $meal = $meal_query->paginate($perPage);
 
         return MealResource::collection($meal);
     }
