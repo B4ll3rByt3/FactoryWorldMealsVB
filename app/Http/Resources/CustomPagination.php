@@ -16,13 +16,13 @@ class CustomPagination extends LengthAwarePaginator
         return [
             'meta'=>[
                 'currentPage' => $this->currentPage(),
-                'totalItems'       => $this->total(),
-                'perPage'     => $this->perPage(),
-                'totalPages'  => $this->lastPage(),
+                'totalItems' => $this->total(),
+                'perPage' => $this->perPage(),
+                'totalPages' => $this->lastPage(),
             ],
             'links' => [
-                'prev'=> $this->previousPageUrl(),
-                'next'=>$this->nextPageUrl(),
+                'prev' => $this->previousPageUrl(),
+                'next' =>$this->nextPageUrl(),
             ],
         ];
     }

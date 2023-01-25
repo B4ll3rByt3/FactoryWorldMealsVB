@@ -7,12 +7,9 @@ use App\Http\Requests\MealRequest;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MealResource;
-use App\Http\Resources\MealCollection;
-use App\Http\Resources\CustomPagination;
 
 class MealController extends Controller
 {
-
     public function meals(MealRequest $request)
     {
         if ($request->lang) {
@@ -66,7 +63,6 @@ class MealController extends Controller
                 $meal_query->whereRelation('tags', 'tag_id', $tags);
             }
         }
-
 
         $meal=$meal_query->paginate($perPage);
 
