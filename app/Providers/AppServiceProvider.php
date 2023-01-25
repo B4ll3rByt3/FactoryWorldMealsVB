@@ -17,9 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->alias(CustomPagination::class, LengthAwarePaginator::class);
-        // Eloquent uses the class instead of the contract 🤔
-        $this->app->alias(CustomPagination::class, LengthAwarePaginatorContract::class);
+        //
     }
 
     /**

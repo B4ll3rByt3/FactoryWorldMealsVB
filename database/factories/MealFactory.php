@@ -41,7 +41,7 @@ class MealFactory extends Factory
         ];
 
         if ($meal['updated_at'] !== null) {
-            $meal['deleted_at'] = fake()->optional(0.2, null)->date();
+            $meal['deleted_at'] = fake()->optional(0.4, null)->date();
         }
 
         if ($meal['updated_at'] !== null and $meal['deleted_at'] !== null) {
