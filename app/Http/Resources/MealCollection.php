@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class MealCollection extends ResourceCollection
@@ -20,6 +21,8 @@ class MealCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+        $currentURL = URL::full();
+        $nextURL = URL::full() + $request->page;
         return [
             'meta' => [
                 'currentPage' => $this->currentPage(),
@@ -29,8 +32,8 @@ class MealCollection extends ResourceCollection
             ],
             'data' => $this->collection,
             'links' => [
-                'prev' => $this->previousPageUrl(),
-                'next' => $this->nextPageUrl(),
+                'prev' => $currentURL,
+                'next' => $nextURL,
             ],
         ];
     }

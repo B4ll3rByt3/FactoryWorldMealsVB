@@ -21,7 +21,7 @@ class Meal extends Model
     protected $fillable = ['meal_status', 'created_at', 'updated_at', 'deleted_at'];
     protected $dates = ['deleted_at'];
     public $timestamps = false;
-    protected $hidden = ['links'];
+    protected $softDelete = true;
 
     public function category(): HasOne
     {
@@ -34,6 +34,6 @@ class Meal extends Model
 
     public function ingredients(): BelongsToMany
     {
-        return $this -> belongsToMany(Ingredient::class, 'meal_ingredients')->withSoftDeletes();
+        return $this -> belongsToMany(Ingredient::class, 'meal_ingredients');
     }
 }

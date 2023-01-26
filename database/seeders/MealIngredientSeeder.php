@@ -17,7 +17,7 @@ class MealIngredientSeeder extends Seeder
      */
     public function run()
     {
-        $meals = Meal::all();
+        $meals = Meal::withTrashed()->get();
         $ingrediants = Ingredient::all();
 
         foreach ($meals as $meal) {

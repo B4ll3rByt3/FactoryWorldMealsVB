@@ -26,6 +26,9 @@ class MealFactory extends Factory
         $meal_title_en = ['Naziv jela ' . $title_id_en++ . ' na EN jeziku'];
         $meal_description_hr = ['Opis jela ' . $description_id_hr++ . ' na HR jeziku'];
         $meal_description_en = ['Opis jela ' . $description_id_en++ . ' na EN jeziku'];
+        $created_at = fake()->dateTime();
+        $updated_at = fake()->optional(0.4, null)->dateTimeBetween($created_at, '+20 days');
+        $deleted_at = fake()->optional(0.4, null)->dateTimeBetween($updated_at, '+20 days');
 
         $meal = [
             'hr' => [
@@ -35,12 +38,12 @@ class MealFactory extends Factory
                 'meal_title'  => fake()->randomElement($meal_title_en),
                 'meal_description' => fake()->randomElement($meal_description_en),],
             'category_id' => fake()->optional(0.6, null)->randomElement($ids),
-            'created_at' => fake()->dateTime(),
-            'updated_at' => fake()->optional(0.6, null)->dateTime(),
+            'created_at' => $created_at,
+            'updated_at' => $updated_at,
         ];
 
         if ($meal['updated_at'] !== null) {
-            $meal['deleted_at'] = fake()->optional(0.4, null)->dateTime();
+            $meal['deleted_at'] = $deleted_at;
         }
 
         if ($meal['updated_at'] !== null and $meal['deleted_at'] !== null) {
