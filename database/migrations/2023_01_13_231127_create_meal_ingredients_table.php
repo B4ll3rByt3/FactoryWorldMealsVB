@@ -25,6 +25,7 @@ return new class extends Migration
                     ->on('ingredients')
                     ->onDelete('cascade');
             $table->primary(['meal_id','ingredient_id']);
+            $table->softDeletes();
         });
     }
 

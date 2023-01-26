@@ -20,6 +20,9 @@ class MealResource extends JsonResource
             'title' => $this->meal_title,
             'description' => $this->meal_description,
             'status' => $this->meal_status,
+            'deleted_at' => $this->when($this->meal_status === 'deleted', function () {
+                return $this->deleted_at;
+            }),
             'category' => new CategoryResource($this->whenLoaded('category')),
             'tags' => TagResource::collection($this->whenLoaded('tags')),
             'ingredients' => IngredientResource::collection($this->whenLoaded('ingredients')),

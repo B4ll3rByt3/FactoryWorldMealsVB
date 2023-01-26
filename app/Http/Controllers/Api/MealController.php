@@ -45,7 +45,7 @@ class MealController extends Controller
         }
 
         if ($request->diff_time > 0) {
-            $meal_query->orWhere('created_at', '>=', date($request->diff_time))->restore();
+            $meal_query->orWhere('created_at', '>=', date($request->diff_time))->withTrashed();
         }
 
         if ($request->category) {
