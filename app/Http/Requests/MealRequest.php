@@ -32,7 +32,7 @@ class MealRequest extends FormRequest
             'tags' => 'sometimes|min:1|distinct|integer',
             'diff_time' => 'sometimes|date_format:U',
             'per_page' => 'sometimes|between:1,1|integer',
-            'page' => 'sometimes|between:1,1|integer',
+            'page' => 'sometimes|min:1|integer',
             'category' => 'sometimes|min:1'
         ];
     }
@@ -45,7 +45,7 @@ class MealRequest extends FormRequest
             'tags.min' => 'Mora biti upisan minimalno jedan ID',
             'diff_time.date_format' => 'Parametar dif_time mora bit u formatu UNIX timestamp',
             'per_page.between' => 'Mora bit izabran samo jedan broj',
-            'page.between' => 'Mora bit izabran samo jedan broj',
+            'page.min' => 'Mora bit izabran samo jedan broj',
             'category.min' => 'mora biti upisan samo jedan uvijet ID, null, !null',
         ];
     }

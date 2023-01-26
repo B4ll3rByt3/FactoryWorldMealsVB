@@ -21,19 +21,40 @@ class MealCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        $currentURL = URL::full();
-        $nextURL = URL::full() + $request->page;
+        $curent_page = $this->currentPage();
+        $total_page = $this->lastPage();
+        $currentURL = str_replace(['&page=' . $curent_page], '', URL::full()) . '&page=' . $curent_page;
+        $nextURL = str_replace(['&page=' . $curent_page], '', URL::full()) . '&page=' . $curent_page + 1;
+        if ($curent_page == $total_page) {
+            $nextURL = null;
+        } else {
+            $nextURL = str_replace(['&page=' . $curent_page], '', URL::full()) . '&page=' . $curent_page + 1;
+        }
+
+        if ($this->currentPage() == 1) {
+            $prevPage = null;
+        } else {
+            $prevPage = str_replace(['&page=' . $curent_page], '', URL::full()) . '&page=' . $curent_page - 1;
+        }
+
+        if ($curent_page > $total_page) {
+            $response = [
+                'message' => 'Upisan je broj stranica veci od maximalnog broja stranica',
+            ];
+            return response()->json($response);
+        }
         return [
             'meta' => [
-                'currentPage' => $this->currentPage(),
+                'currentPage' => $curent_page,
                 'totalItems' => $this->total(),
                 'perPage' => $this->perPage(),
                 'totalPages' => $this->lastPage(),
             ],
             'data' => $this->collection,
             'links' => [
-                'prev' => $currentURL,
-                'next' => $nextURL,
+                'prev' => str_replace('%2C', ',', $prevPage),
+                'next' => str_replace('%2C', ',', $nextURL),
+                'self' => str_replace('%2C', ',', $currentURL),
             ],
         ];
     }
