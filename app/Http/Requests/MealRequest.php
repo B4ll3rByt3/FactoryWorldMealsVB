@@ -29,7 +29,7 @@ class MealRequest extends FormRequest
     {
         return [
             'lang' => 'required|in:hr,en',
-            'tags' => 'sometimes|min:1|distinct|integer',
+            'tags' => 'sometimes|min:1|distinct',
             'diff_time' => 'sometimes|date_format:U',
             'per_page' => 'sometimes|between:1,1|integer',
             'page' => 'sometimes|min:1|integer',

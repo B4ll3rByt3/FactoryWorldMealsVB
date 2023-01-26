@@ -26,13 +26,13 @@ class MealCollection extends ResourceCollection
         $currentURL = str_replace(['&page=' . $curent_page], '', URL::full()) . '&page=' . $curent_page;
         $nextURL = str_replace(['&page=' . $curent_page], '', URL::full()) . '&page=' . $curent_page + 1;
         if ($curent_page == $total_page) {
-            $nextURL = null;
+            $nextURL = 'null';
         } else {
             $nextURL = str_replace(['&page=' . $curent_page], '', URL::full()) . '&page=' . $curent_page + 1;
         }
 
         if ($this->currentPage() == 1) {
-            $prevPage = null;
+            $prevPage = 'null';
         } else {
             $prevPage = str_replace(['&page=' . $curent_page], '', URL::full()) . '&page=' . $curent_page - 1;
         }
