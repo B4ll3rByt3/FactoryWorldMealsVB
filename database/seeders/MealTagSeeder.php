@@ -6,7 +6,6 @@ use App\Models\Tag;
 use App\Models\Meal;
 use App\Models\MealTag;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class MealTagSeeder extends Seeder
 {

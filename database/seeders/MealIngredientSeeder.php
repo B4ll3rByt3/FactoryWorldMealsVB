@@ -6,7 +6,6 @@ use App\Models\Meal;
 use App\Models\Ingredient;
 use App\Models\MealIngredient;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class MealIngredientSeeder extends Seeder
 {

@@ -6,7 +6,6 @@ use App\Models\Meal;
 use App\Http\Requests\MealRequest;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MealResource;
 use App\Http\Resources\MealCollection;
 
 class MealController extends Controller
@@ -38,7 +37,7 @@ class MealController extends Controller
                 ];
                 return response()->json($response, 200);
             } else {
-                $meal_query = Meal::with($with)->where('meal_status', '!=', 'deleted');
+                $meal_query = Meal::with($with);
             }
         } else {
             $meal_query = Meal::where('meal_status', '!=', 'deleted');
@@ -57,7 +56,7 @@ class MealController extends Controller
                 $meal_query->where('category_id', $request->category);
             } else {
                 $response = [
-                    'message' => 'Krivo upisan query. Mora biti pozitivan broj ili null ili !null',
+                    'message' => 'Krivo upisan query. Mora biti pozitivan broj, null ili !null',
                 ];
                 return response()->json($response, 200);
             }
